@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 gem 'rspec'
 gem 'rspec-given'
-gem 'guard-rspec'
+gem 'guard-rake'
