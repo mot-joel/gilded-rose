@@ -1,3 +1,12 @@
+class GildedRose
+  attr_accessor :name, :sell_in, :quality
+
+  def initialize(name, sell_in, quality)
+    @name = name
+    @sell_in = sell_in
+    @quality = quality
+  end
+
 def update_quality(items)
   backstage = 'Backstage passes to a TAFKAL80ETC concert'
   brie = 'Aged Brie'
@@ -49,10 +58,10 @@ def update_quality(items)
     end
   end
 end
-
+end
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
 
-Item = Struct.new(:name, :sell_in, :quality)
+# Item = Struct.new(:name, :sell_in, :quality)
 
 # We use the setup in the spec rather than the following for testing.
 #

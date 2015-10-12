@@ -1,13 +1,13 @@
 require 'rspec/given'
 require 'gilded_rose'
 
-RSpec.describe '#update_quality' do
+RSpec.describe GildedRose do
   context 'with a single' do
     Given(:initial_sell_in) { 5 }
     Given(:initial_quality) { 10 }
-    Given(:item) { Item.new(name, initial_sell_in, initial_quality) }
+    Given(:item) { described_class.new(name, initial_sell_in, initial_quality) }
 
-    When { update_quality([item]) }
+    When { item.update_quality([item]) }
 
     context 'normal item' do
       Given(:name) { 'NORMAL ITEM' }
@@ -201,12 +201,12 @@ RSpec.describe '#update_quality' do
   context 'with several objects' do
     Given(:items) do
       [
-        Item.new('NORMAL ITEM', 5, 10),
-        Item.new('Aged Brie', 3, 10)
+        described_class.new('NORMAL ITEM', 5, 10),
+        described_class.new('Aged Brie', 3, 10)
       ]
     end
 
-    When { update_quality(items) }
+    When { items.first.update_quality(items) }
 
     Then { expect(items[0].quality).to eq 9 }
     Then { expect(items[0].sell_in).to eq 4 }
