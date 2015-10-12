@@ -2,7 +2,7 @@ require 'rspec/given'
 require 'gilded_rose'
 
 RSpec.describe GildedRose do
-  context 'with a single' do
+  context '#tick' do
     Given(:initial_sell_in) { 5 }
     Given(:initial_quality) { 10 }
     Given(:item) { described_class.new(name, initial_sell_in, initial_quality) }
@@ -196,22 +196,5 @@ RSpec.describe GildedRose do
         end
       end
     end
-  end
-
-  context 'with several objects' do
-    Given(:items) do
-      [
-        described_class.new('NORMAL ITEM', 5, 10),
-        described_class.new('Aged Brie', 3, 10)
-      ]
-    end
-
-    When { described_class.update_quality(items) }
-
-    Then { expect(items[0].quality).to eq 9 }
-    Then { expect(items[0].sell_in).to eq 4 }
-
-    Then { expect(items[1].quality).to eq 11 }
-    Then { expect(items[1].sell_in).to eq 2 }
   end
 end
