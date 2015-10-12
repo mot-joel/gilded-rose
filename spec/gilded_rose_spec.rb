@@ -7,7 +7,7 @@ RSpec.describe GildedRose do
     Given(:initial_quality) { 10 }
     Given(:item) { described_class.new(name, initial_sell_in, initial_quality) }
 
-    When { item.update_quality([item]) }
+    When { item.tick }
 
     context 'normal item' do
       Given(:name) { 'NORMAL ITEM' }
@@ -206,7 +206,7 @@ RSpec.describe GildedRose do
       ]
     end
 
-    When { items.first.update_quality(items) }
+    When { described_class.update_quality(items) }
 
     Then { expect(items[0].quality).to eq 9 }
     Then { expect(items[0].sell_in).to eq 4 }

@@ -7,7 +7,7 @@ class GildedRose
     @quality = quality
   end
 
-  def update_quality(items)
+  def self.update_quality(items)
     items.each(&:tick)
   end
 
