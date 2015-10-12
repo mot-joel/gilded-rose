@@ -1,10 +1,18 @@
 class GildedRose
-  attr_accessor :name, :sell_in, :quality
+  attr_accessor :name, :days_remaining, :quality
 
-  def initialize(name, sell_in, quality)
+  def initialize(name, days_remaining, quality)
     @name = name
-    @sell_in = sell_in
+    @days_remaining = days_remaining
     @quality = quality
+  end
+
+  def sell_in
+    @days_remaining
+  end
+
+  def sell_in=(x)
+    @days_remaining = x
   end
 
   def self.update_quality(items)
@@ -22,12 +30,12 @@ class GildedRose
       if @quality < 50
         @quality += 1
         if @name == 'Backstage passes to a TAFKAL80ETC concert'
-          if @sell_in < 11
+          if @days_remaining < 11
             if @quality < 50
               @quality += 1
             end
           end
-          if @sell_in < 6
+          if @days_remaining < 6
             if @quality < 50
               @quality += 1
             end
@@ -36,9 +44,9 @@ class GildedRose
       end
     end
     if @name != 'Sulfuras, Hand of Ragnaros'
-      @sell_in -= 1
+      @days_remaining -= 1
     end
-    if @sell_in < 0
+    if @days_remaining < 0
       if @name != 'Aged Brie'
         if @name != 'Backstage passes to a TAFKAL80ETC concert'
           if @quality > 0
