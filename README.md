@@ -11,27 +11,32 @@ The choice is yours.
 
 1. Clone or fork the repository
 
-
-    git clone https://github.com/jreut/gilded-rose
-
+```
+git clone https://github.com/jreut/gilded-rose
+```
 or
 
-    hub fork jreut/gilded-rose
+```
+hub fork jreut/gilded-rose
+```
 
 2. Checkout the `start` tag (also equivalent to the HEAD of the `problem` branch)
 
-
-    git checkout -b my-new-branch start
+```
+git checkout -b my-new-branch start
+```
 
 3. Install dependencies
 
-
-    bundle install
+```
+bundle install
+```
 
 4. Start refactoring!
 
-
-    bundle exec guard
+```
+bundle exec guard
+```
 
 ## Meta
 
