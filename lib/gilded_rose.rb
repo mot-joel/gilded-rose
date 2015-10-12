@@ -7,7 +7,7 @@ class GildedRose
     @quality = quality
   end
 
-def update_quality(items)
+def tick(items)
   items.each do |item|
     if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert'
       if item.quality > 0
@@ -54,6 +54,8 @@ def update_quality(items)
     end
   end
 end
+
+  alias_method :update_quality, :tick
 end
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
 
