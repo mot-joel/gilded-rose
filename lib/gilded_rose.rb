@@ -15,10 +15,6 @@ class GildedRose
     @days_remaining = x
   end
 
-  def self.update_quality(items)
-    items.each(&:tick)
-  end
-
   def tick
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
       if @quality > 0
