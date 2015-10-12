@@ -42,4 +42,4 @@ bundle exec guard
 
 There are many solutions to this exercise on the Web. Try to solve the problem yourself before visiting any of these links below.
 
-This repository is a fork of [Jim Weirich's](https://github.com/jimweirich/gilded_rose_kata), which is itself a Ruby port of the challenge presented in [this blog post](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/). Sandi Metz provides an excellent example of the refactoring in [a talk](https://youtu.be/8bZh5LMaSmE) from RailsConf 2014
+This repository is a fork of [Jim Weirich's](https://github.com/jimweirich/gilded_rose_kata), which is itself a Ruby port of the challenge presented in [this blog post](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/). Sandi Metz provides an excellent example of the refactoring in [a talk](https://youtu.be/8bZh5LMaSmE) from RailsConf 2014.
