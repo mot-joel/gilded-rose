@@ -7,14 +7,6 @@ class GildedRose
     @quality = quality
   end
 
-  def sell_in
-    @days_remaining
-  end
-
-  def sell_in=(x)
-    @days_remaining = x
-  end
-
   def tick
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
       if @quality > 0
