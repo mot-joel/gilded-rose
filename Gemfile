@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
-gem 'rspec'
-gem 'rspec-given'
-gem 'guard-rake'
-gem 'guard-rspec'
-gem 'flog'
+gem 'rspec', '~> 3' # test framework
+gem 'rspec-given', '~> 3' # Given-When-Then for rspec
+gem 'guard' # file system watcher and runner
+gem 'guard-rake' # guard plugin for rake
+gem 'guard-rspec' # guard plugin for rspec
+gem 'flog' # complexity metric
