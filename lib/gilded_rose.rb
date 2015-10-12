@@ -1,5 +1,5 @@
 class GildedRose
-  attr_accessor :name, :days_remaining, :quality
+  attr_reader :name, :days_remaining, :quality
 
   def initialize(name, days_remaining, quality)
     @name = name
