@@ -20,10 +20,10 @@ or
 hub fork jreut/gilded-rose
 ```
 
-2. Checkout the `start` tag (also equivalent to the HEAD of the `problem` branch)
+2. Checkout the HEAD of the `problem` branch
 
 ```
-git checkout -b my-new-branch start
+git checkout -b my-new-branch problem
 ```
 
 3. Install dependencies
