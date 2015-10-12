@@ -10,4 +10,4 @@ task :flog do
   f.report
 end
 
-task default: :spec
+task default: :flog
