@@ -14,6 +14,18 @@ class Normal
   end
 end
 
+class Sulfuras
+  attr_reader :days_remaining, :quality
+
+  def initialize(days_remaining, quality)
+    @days_remaining = days_remaining
+    @quality = quality
+  end
+
+  def tick
+  end
+end
+
 class GildedRose
   attr_reader :name
 
@@ -56,6 +68,8 @@ class GildedRose
     when 'Backstage passes to a TAFKAL80ETC concert'
       backstage_tick
     when 'Sulfuras, Hand of Ragnaros'
+      @item = Sulfuras.new(@days_remaining, @quality)
+      @item.tick
     else
       @item = Normal.new(@days_remaining, @quality)
       @item.tick
