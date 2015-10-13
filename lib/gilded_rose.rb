@@ -18,6 +18,19 @@ class GildedRose
       return @quality = 50 if @quality >= 50
       return
     end
+    if @name == 'Backstage passes to a TAFKAL80ETC concert'
+      @days_remaining -= 1
+      if @days_remaining >= 10
+        @quality += 1
+      elsif @days_remaining < 10 && @days_remaining > 0
+        @quality += 2
+      elsif @days_remaining == 0
+        @quality += 3
+      else @quality = 0
+      end
+      return @quality = 50 if @quality >= 50
+      return
+    end
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
       if @quality > 0
         if @name != 'Sulfuras, Hand of Ragnaros'
