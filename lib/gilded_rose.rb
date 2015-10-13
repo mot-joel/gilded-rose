@@ -22,11 +22,12 @@ class GildedRose
       @days_remaining -= 1
       if @days_remaining >= 10
         @quality += 1
-      elsif @days_remaining < 10 && @days_remaining > 0
+      elsif @days_remaining < 10 && @days_remaining >= 5
         @quality += 2
-      elsif @days_remaining == 0
+      elsif @days_remaining < 5 && @days_remaining >= 0
         @quality += 3
-      else @quality = 0
+      else
+        @quality = 0
       end
       return @quality = 50 if @quality >= 50
       return
