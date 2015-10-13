@@ -5,7 +5,9 @@ class Item
     accelerating_quality: false,
     continuous_quality: false,
     hard_expiration: false,
-    eternal: false
+    eternal: false,
+    half_on_expiration: false,
+    decrement_if_new: false
   }
 
   attr_accessor :config
