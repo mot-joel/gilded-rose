@@ -64,14 +64,10 @@ module GildedRose
   attr_reader :name
 
   def self.new(name, days_remaining, quality)
-    klass_for(name).new(days_remaining, quality)
-  end
-
-  def self.klass_for(name)
     Hash.new(Normal).merge(
       'Aged Brie' => Brie,
       'Backstage passes to a TAFKAL80ETC concert' => Backstage,
       'Sulfuras, Hand of Ragnaros' => Sulfuras
-    )[name.to_s]
+    )[name.to_s].new(days_remaining, quality)
   end
 end
