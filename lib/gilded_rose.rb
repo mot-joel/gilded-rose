@@ -32,6 +32,9 @@ class GildedRose
       return @quality = 50 if @quality >= 50
       return
     end
+    if @name == 'Sulfuras, Hand of Ragnaros'
+      return
+    end
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
       if @quality > 0
         if @name != 'Sulfuras, Hand of Ragnaros'
