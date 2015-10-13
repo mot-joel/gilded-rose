@@ -37,7 +37,6 @@ class GildedRose
     when 'Backstage passes to a TAFKAL80ETC concert'
       backstage_tick
     when 'Sulfuras, Hand of Ragnaros'
-      return
     else
       normal_tick
     end
