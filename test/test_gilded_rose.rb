@@ -30,25 +30,28 @@ class TestNormal < Minitest::Test # :nodoc:
     @object = Normal.new
   end
 
+  def test_days_remaining_decreases_by_one
+    @object = Normal.new(100, 3)
+    @object.tick
+    assert_equal(99, @object.days_remaining)
+  end
+
   def test_before_sell_date
     @object = Normal.new(5, 10)
     @object.tick
     assert_equal(9, @object.quality)
-    assert_equal(4, @object.days_remaining)
   end
 
   def test_on_sell_date
     @object = Normal.new(0, 10)
     @object.tick
     assert_equal(8, @object.quality)
-    assert_equal(-1, @object.days_remaining)
   end
 
   def test_after_sell_date
     @object = Normal.new(-10, 10)
     @object.tick
     assert_equal(8, @object.quality)
-    assert_equal(-11, @object.days_remaining)
   end
 
   def test_zero_quality
@@ -58,56 +61,51 @@ class TestNormal < Minitest::Test # :nodoc:
   end
 end
 
+class TestBrie < Minitest::Test
+  include TestItemInterface
+
+  def setup
+    @object = Brie.new
+  end
+
+  def test_days_remaining_decreases_by_one
+    @object = Brie.new(100, 3)
+    @object.tick
+    assert_equal(99, @object.days_remaining)
+  end
+
+  def test_quality_increases_before_sell_date
+    @object = Brie.new(5, 10)
+    @object.tick
+    assert_equal(11, @object.quality)
+  end
+
+  def test_quality_never_exceeds_maximum
+    @object = Brie.new(5, 50)
+    @object.tick
+    assert_equal(50, @object.quality)
+  end
+
+  def test_quality_caps_at_maximum
+    @object = Brie.new(0, 49)
+    @object.tick
+    assert_equal(50, @object.quality)
+  end
+
+  def test_quality_increases_more_on_sell_date
+    @object = Brie.new(0, 10)
+    @object.tick
+    assert_equal(12, @object.quality)
+  end
+
+  def test_quality_increases_more_after_sell_date
+    @object = Brie.new(-10, 10)
+    @object.tick
+    assert_equal(12, @object.quality)
+  end
+end
+
 class TestGildedRose < Minitest::Test # :nodoc:
-  def test_brie_before_sell_date
-    item = GildedRose.new('Aged Brie', 5, 10)
-    item.tick
-    assert_equal(11, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
-  def test_brie_with_max_quality
-    item = GildedRose.new('Aged Brie', 5, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
-  def test_brie_on_sell_date
-    item = GildedRose.new('Aged Brie', 0, 10)
-    item.tick
-    assert_equal(12, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_brie_on_sell_date_near_max_quality
-    item = GildedRose.new('Aged Brie', 0, 49)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_brie_on_sell_date_with_max_quality
-    item = GildedRose.new('Aged Brie', 0, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_brie_after_sell_date
-    item = GildedRose.new('Aged Brie', -10, 10)
-    item.tick
-    assert_equal(12, item.quality)
-    assert_equal(-11, item.days_remaining)
-  end
-
-  def test_brie_after_sell_date_with_max_quality
-    item = GildedRose.new('Aged Brie', -10, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(-11, item.days_remaining)
-  end
-
   def test_sulfuras_before_sell_date
     item = GildedRose.new('Sulfuras, Hand of Ragnaros', 5, 80)
     item.tick
