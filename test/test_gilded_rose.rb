@@ -185,7 +185,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_before_sell_date
-    skip
     item = GildedRose.new('Conjured Mana Cake', 5, 10)
     item.tick
     assert_equal(8, item.quality)
@@ -193,7 +192,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_before_sell_date_at_zero_quality
-    skip
     item = GildedRose.new('Conjured Mana Cake', 5, 0)
     item.tick
     assert_equal(0, item.quality)
@@ -201,7 +199,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_on_sell_date
-    skip
     item = GildedRose.new('Conjured Mana Cake', 0, 10)
     item.tick
     assert_equal(6, item.quality)
@@ -209,7 +206,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_on_sell_date_at_zero_quality
-    skip
     item = GildedRose.new('Conjured Mana Cake', 0, 0)
     item.tick
     assert_equal(0, item.quality)
@@ -217,7 +213,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_after_sell_date
-    skip
     item = GildedRose.new('Conjured Mana Cake', -10, 10)
     item.tick
     assert_equal(6, item.quality)
@@ -225,7 +220,6 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_conjured_after_sell_date_at_zero_quality
-    skip
     item = GildedRose.new('Conjured Mana Cake', -10, 0)
     item.tick
     assert_equal(0, item.quality)

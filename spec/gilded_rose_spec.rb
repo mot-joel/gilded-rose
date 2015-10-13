@@ -161,7 +161,6 @@ RSpec.describe GildedRose do
     end
 
     context 'conjured item' do
-      before { skip } # TODO: remove this
       Given(:name) { 'Conjured Mana Cake' }
 
       Invariant { expect(item.days_remaining).to eq(days_remaining - 1) }

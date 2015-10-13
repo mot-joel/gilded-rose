@@ -19,11 +19,6 @@ class Normal < Item
   end
 end
 
-class Sulfuras < Item
-  def tick
-  end
-end
-
 class Backstage < Item
   def tick
     @days_remaining -= 1
@@ -44,6 +39,15 @@ class Brie < Item
   end
 end
 
+class Conjured < Item
+  def tick
+    @days_remaining -= 1
+    @quality -= 2
+    @quality -= 2 if @days_remaining < 1
+    @quality = 0 if @quality <= 0
+  end
+end
+
 module GildedRose
   attr_reader :name
 
@@ -51,7 +55,8 @@ module GildedRose
     Hash.new(Normal).merge(
       'Aged Brie' => Brie,
       'Backstage passes to a TAFKAL80ETC concert' => Backstage,
-      'Sulfuras, Hand of Ragnaros' => Sulfuras
+      'Sulfuras, Hand of Ragnaros' => Item,
+      'Conjured Mana Cake' => Conjured
     )[name.to_s].new(days_remaining, quality)
   end
 end
