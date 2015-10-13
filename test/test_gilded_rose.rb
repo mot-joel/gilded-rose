@@ -21,6 +21,13 @@ class TestItem < Minitest::Test # :nodoc:
   def setup
     @object = Item.new
   end
+
+  def test_nothing_changes
+    @object = Item.new(5, 80)
+    @object.tick
+    assert_equal(80, @object.quality)
+    assert_equal(5, @object.days_remaining)
+  end
 end
 
 class TestNormal < Minitest::Test # :nodoc:
@@ -106,27 +113,6 @@ class TestBrie < Minitest::Test
 end
 
 class TestGildedRose < Minitest::Test # :nodoc:
-  def test_sulfuras_before_sell_date
-    item = GildedRose.new('Sulfuras, Hand of Ragnaros', 5, 80)
-    item.tick
-    assert_equal(80, item.quality)
-    assert_equal(5, item.days_remaining)
-  end
-
-  def test_sulfuras_on_sell_date
-    item = GildedRose.new('Sulfuras, Hand of Ragnaros', 0, 80)
-    item.tick
-    assert_equal(80, item.quality)
-    assert_equal(0, item.days_remaining)
-  end
-
-  def test_sulfuras_after_sell_date
-    item = GildedRose.new('Sulfuras, Hand of Ragnaros', -10, 80)
-    item.tick
-    assert_equal(80, item.quality)
-    assert_equal(-10, item.days_remaining)
-  end
-
   def test_backstage_long_before_sell_date
     item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 11, 10)
     item.tick
