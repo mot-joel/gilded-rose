@@ -112,91 +112,73 @@ class TestBrie < Minitest::Test
   end
 end
 
+class TestBackstage < Minitest::Test
+  def setup
+    @object = Backstage.new
+  end
+
+  def test_days_remaining_decreases_by_one
+    @object = Backstage.new(100, 3)
+    @object.tick
+    assert_equal(99, @object.days_remaining)
+  end
+
+  def test_quality_never_exceeds_maximum
+    @object = Backstage.new(5, 50)
+    @object.tick
+    assert_equal(50, @object.quality)
+  end
+
+  def test_quality_caps_at_maximum
+    @object = Backstage.new(1, 49)
+    @object.tick
+    assert_equal(50, @object.quality)
+  end
+
+  def test_long_before_sell_date
+    @object = Backstage.new(11, 10)
+    @object.tick
+    assert_equal(11, @object.quality)
+  end
+
+  def test_medium_close_to_sell_date_upper_bound
+    @object = Backstage.new(10, 10)
+    @object.tick
+    assert_equal(12, @object.quality)
+  end
+
+  def test_medium_close_to_sell_date_lower_bound
+    @object = Backstage.new(6, 10)
+    @object.tick
+    assert_equal(12, @object.quality)
+  end
+
+  def test_very_close_to_sell_date_upper_bound
+    @object = Backstage.new(5, 10)
+    @object.tick
+    assert_equal(13, @object.quality)
+  end
+
+  def test_very_close_to_sell_date_lower_bound
+    @object = Backstage.new(1, 10)
+    @object.tick
+    assert_equal(13, @object.quality)
+  end
+
+  def test_quality_drops_on_sell_date
+    @object = Backstage.new(0, 10)
+    @object.tick
+    assert_equal(0, @object.quality)
+  end
+
+  def test_quality_drops_after_sell_date
+    @object = Backstage.new(-10, 10)
+    @object.tick
+    assert_equal(0, @object.quality)
+  end
+end
+
 class TestGildedRose < Minitest::Test # :nodoc:
-  def test_backstage_long_before_sell_date
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 11, 10)
-    item.tick
-    assert_equal(11, item.quality)
-    assert_equal(10, item.days_remaining)
-  end
-
-  def test_backstage_long_before_sell_date_at_max_quality
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 11, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(10, item.days_remaining)
-  end
-
-  def test_backstage_medium_close_to_sell_date_upper_bound
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 10, 10)
-    item.tick
-    assert_equal(12, item.quality)
-    assert_equal(9, item.days_remaining)
-  end
-
-  def test_backstage_medium_close_to_sell_date_upper_bound_at_max_quality
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 10, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(9, item.days_remaining)
-  end
-
-  def test_backstage_medium_close_to_sell_date_lower_bound
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 6, 10)
-    item.tick
-    assert_equal(12, item.quality)
-    assert_equal(5, item.days_remaining)
-  end
-
-  def test_backstage_medium_close_to_sell_date_lower_bound_at_max_quality
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 6, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(5, item.days_remaining)
-  end
-
-  def test_backstage_very_close_to_sell_date_upper_bound
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 5, 10)
-    item.tick
-    assert_equal(13, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
-  def test_backstage_very_close_to_sell_date_upper_bound_at_max_quality
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 5, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
-  def test_backstage_very_close_to_sell_date_lower_bound
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 1, 10)
-    item.tick
-    assert_equal(13, item.quality)
-    assert_equal(0, item.days_remaining)
-  end
-
-  def test_backstage_very_close_to_sell_date_lower_bound_at_max_quality
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 1, 50)
-    item.tick
-    assert_equal(50, item.quality)
-    assert_equal(0, item.days_remaining)
-  end
-
-  def test_backstage_on_sell_date
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 0, 10)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_backstage_after_sell_date
-    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', -10, 10)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(-11, item.days_remaining)
-  end
-
   def test_conjured_before_sell_date
     item = GildedRose.new('Conjured Mana Cake', 5, 10)
     item.tick
