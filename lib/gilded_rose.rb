@@ -60,31 +60,18 @@ class Brie
   end
 end
 
-class GildedRose
+module GildedRose
   attr_reader :name
 
-  def initialize(name, days_remaining, quality)
-    @name = name
-    @item = klass_for(name).new(days_remaining, quality)
+  def self.new(name, days_remaining, quality)
+    klass_for(name).new(days_remaining, quality)
   end
 
-  def klass_for(name)
+  def self.klass_for(name)
     Hash.new(Normal).merge(
       'Aged Brie' => Brie,
       'Backstage passes to a TAFKAL80ETC concert' => Backstage,
       'Sulfuras, Hand of Ragnaros' => Sulfuras
     )[name.to_s]
-  end
-
-  def quality
-    @item.quality
-  end
-
-  def days_remaining
-    @item.days_remaining
-  end
-
-  def tick
-    @item.tick
   end
 end
