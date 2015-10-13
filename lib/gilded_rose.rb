@@ -34,6 +34,13 @@ class GildedRose
     when 'Sulfuras, Hand of Ragnaros'
       return
     else
+      @days_remaining -= 1
+      return if @quality <= 0
+      if @days_remaining >= 4
+        @quality -= 1
+      else
+        @quality -= 2
+      end
       return
     end
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
