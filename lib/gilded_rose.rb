@@ -8,7 +8,8 @@ class GildedRose
   end
 
   def tick
-    if @name == 'Aged Brie'
+    case @name
+    when 'Aged Brie'
       @days_remaining -= 1
       if @days_remaining < 0
         @quality += 2
@@ -17,8 +18,7 @@ class GildedRose
       end
       return @quality = 50 if @quality >= 50
       return
-    end
-    if @name == 'Backstage passes to a TAFKAL80ETC concert'
+    when 'Backstage passes to a TAFKAL80ETC concert'
       @days_remaining -= 1
       if @days_remaining >= 10
         @quality += 1
@@ -31,8 +31,9 @@ class GildedRose
       end
       return @quality = 50 if @quality >= 50
       return
-    end
-    if @name == 'Sulfuras, Hand of Ragnaros'
+    when 'Sulfuras, Hand of Ragnaros'
+      return
+    else
       return
     end
     if @name != 'Aged Brie' && @name != 'Backstage passes to a TAFKAL80ETC concert'
