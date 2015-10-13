@@ -51,7 +51,7 @@ end
 module GildedRose
   attr_reader :name
 
-  def self.new(name, days_remaining, quality)
+  def self.new(name, days_remaining = nil, quality = nil)
     Hash.new(Normal).merge(
       'Aged Brie' => Brie,
       'Backstage passes to a TAFKAL80ETC concert' => Backstage,
