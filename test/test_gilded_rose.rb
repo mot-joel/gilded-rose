@@ -178,46 +178,41 @@ class TestBackstage < Minitest::Test
   end
 end
 
-class TestGildedRose < Minitest::Test # :nodoc:
-  def test_conjured_before_sell_date
-    item = GildedRose.new('Conjured Mana Cake', 5, 10)
-    item.tick
-    assert_equal(8, item.quality)
-    assert_equal(4, item.days_remaining)
+class TestConjured < Minitest::Test
+  def setup
+    @object = Conjured.new
   end
 
-  def test_conjured_before_sell_date_at_zero_quality
-    item = GildedRose.new('Conjured Mana Cake', 5, 0)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(4, item.days_remaining)
+  def test_days_remaining_decreases_by_one
+    @object = Conjured.new(100, 3)
+    @object.tick
+    assert_equal(99, @object.days_remaining)
+  end
+
+  def test_quality_caps_at_minimum
+    @object = Conjured.new(0, 1)
+    @object.tick
+    assert_equal(0, @object.quality)
+  end
+
+  def test_conjured_before_sell_date
+    @object = Conjured.new(5, 10)
+    @object.tick
+    assert_equal(8, @object.quality)
   end
 
   def test_conjured_on_sell_date
-    item = GildedRose.new('Conjured Mana Cake', 0, 10)
-    item.tick
-    assert_equal(6, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_conjured_on_sell_date_at_zero_quality
-    item = GildedRose.new('Conjured Mana Cake', 0, 0)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(-1, item.days_remaining)
+    @object = Conjured.new(0, 10)
+    @object.tick
+    assert_equal(6, @object.quality)
   end
 
   def test_conjured_after_sell_date
-    item = GildedRose.new('Conjured Mana Cake', -10, 10)
-    item.tick
-    assert_equal(6, item.quality)
-    assert_equal(-11, item.days_remaining)
+    @object = Conjured.new(-10, 10)
+    @object.tick
+    assert_equal(6, @object.quality)
   end
+end
 
-  def test_conjured_after_sell_date_at_zero_quality
-    item = GildedRose.new('Conjured Mana Cake', -10, 0)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(-11, item.days_remaining)
-  end
+class TestGildedRose < Minitest::Test # :nodoc:
 end
