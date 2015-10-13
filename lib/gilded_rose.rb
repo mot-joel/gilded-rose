@@ -65,31 +65,26 @@ class GildedRose
 
   def initialize(name, days_remaining, quality)
     @name = name
-    @days_remaining = days_remaining
-    @quality = quality
+    @item = klass_for(name).new(days_remaining, quality)
+  end
+
+  def klass_for(name)
+    Hash.new(Normal).merge(
+      'Aged Brie' => Brie,
+      'Backstage passes to a TAFKAL80ETC concert' => Backstage,
+      'Sulfuras, Hand of Ragnaros' => Sulfuras
+    )[name.to_s]
   end
 
   def quality
-    return @item.quality if @item
-    @quality
+    @item.quality
   end
 
   def days_remaining
-    return @item.days_remaining if @item
-    @days_remaining
+    @item.days_remaining
   end
 
   def tick
-    @item = case @name
-            when 'Aged Brie'
-              Brie.new(@days_remaining, @quality)
-            when 'Backstage passes to a TAFKAL80ETC concert'
-              Backstage.new(@days_remaining, @quality)
-            when 'Sulfuras, Hand of Ragnaros'
-              Sulfuras.new(@days_remaining, @quality)
-            else
-              Normal.new(@days_remaining, @quality)
-            end
     @item.tick
   end
 end
