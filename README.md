@@ -7,6 +7,10 @@ This is a refactoring exercise, with one simple goal: **implement the skipped te
 
 The choice is yours.
 
+### Bonus
+
+Refactor the tests, too!
+
 ## Getting started
 
 1. Clone or fork the repository
@@ -23,7 +27,7 @@ hub fork jreut/gilded-rose
 2. Checkout the HEAD of the `problem` branch
 
 ```
-git checkout -b my-new-branch problem
+git checkout -b my-solution problem
 ```
 
 3. Install dependencies
@@ -40,6 +44,18 @@ bundle exec guard
 
 ## Meta
 
+### RSpec vs Minitest
+
+It doesn't matter which testing framework you use[1][]; it just matters that you test your code. I've included a modified version of the original RSpec specs from Jim Weirich and also some equivalent Minitest tests. Just because Minitest is a little lighter-weight and perhaps easier for testing newcomers to understand, I made Minitest the default for this project. If you'd like to switch to RSpec, just uncomment the appropriate sections of the Gemfile and Guardfile.
+
+### Bonus Extra Credit!!!
+
+These tests (especially the Minitest ones I wrote) are pretty badly organized. I agree when Sandi Metz says, "If your tests are hard to write, your architecture is wrong." Once you have solved this exercise, rewrite the tests for extra points!
+
+### History
+
 There are many solutions to this exercise on the Web. Try to solve the problem yourself before visiting any of these links below.
 
 This repository is a fork of [Jim Weirich's](https://github.com/jimweirich/gilded_rose_kata), which is itself a Ruby port of the challenge presented in [this blog post](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/). Sandi Metz provides an excellent example of the refactoring in [a talk](https://youtu.be/8bZh5LMaSmE) from RailsConf 2014.
+
+[1]: http://tenderlovemaking.com/2015/01/23/my-experience-with-minitest-and-rspec.html

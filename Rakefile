@@ -10,7 +10,7 @@ task :flog do
   f.report
 end
 
-task default: :flog
-
 require 'rake/testtask'
 Rake::TestTask.new
+
+task default: [:flog, :test]
