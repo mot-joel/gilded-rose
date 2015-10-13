@@ -11,3 +11,6 @@ task :flog do
 end
 
 task default: :flog
+
+require 'rake/testtask'
+Rake::TestTask.new

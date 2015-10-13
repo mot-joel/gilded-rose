@@ -44,3 +44,15 @@ guard :rspec, cmd: "bundle exec rspec" do
   ruby = dsl.ruby
   dsl.watch_spec_files_for(ruby.lib_files)
 end
+
+guard :minitest do
+  # with Minitest::Unit
+  watch(%r{^test/(.*)\/?test_(.*)\.rb$})
+  watch(%r{^lib/(.*/)?([^/]+)\.rb$})     { |m| "test/#{m[1]}test_#{m[2]}.rb" }
+  watch(%r{^test/test_helper\.rb$})      { 'test' }
+
+  # with Minitest::Spec
+  # watch(%r{^spec/(.*)_spec\.rb$})
+  # watch(%r{^lib/(.+)\.rb$})         { |m| "spec/#{m[1]}_spec.rb" }
+  # watch(%r{^spec/spec_helper\.rb$}) { 'spec' }
+end
