@@ -1,35 +1,64 @@
 require_relative 'test_helper'
 require 'gilded_rose'
 
+module TestItemInterface # :nodoc:
+  def test_responds_to_days_remaining
+    assert_respond_to(@object, :days_remaining)
+  end
+
+  def test_responds_to_quality
+    assert_respond_to(@object, :quality)
+  end
+
+  def test_responds_to_tick
+    assert_respond_to(@object, :tick)
+  end
+end
+
+class TestItem < Minitest::Test # :nodoc:
+  include TestItemInterface
+
+  def setup
+    @object = Item.new
+  end
+end
+
+class TestNormal < Minitest::Test # :nodoc:
+  include TestItemInterface
+
+  def setup
+    @object = Normal.new
+  end
+
+  def test_before_sell_date
+    @object = Normal.new(5, 10)
+    @object.tick
+    assert_equal(9, @object.quality)
+    assert_equal(4, @object.days_remaining)
+  end
+
+  def test_on_sell_date
+    @object = Normal.new(0, 10)
+    @object.tick
+    assert_equal(8, @object.quality)
+    assert_equal(-1, @object.days_remaining)
+  end
+
+  def test_after_sell_date
+    @object = Normal.new(-10, 10)
+    @object.tick
+    assert_equal(8, @object.quality)
+    assert_equal(-11, @object.days_remaining)
+  end
+
+  def test_zero_quality
+    @object = Normal.new(10, 0)
+    @object.tick
+    assert_equal(0, @object.quality)
+  end
+end
+
 class TestGildedRose < Minitest::Test # :nodoc:
-  def test_normal_item_before_sell_date
-    item = GildedRose.new('normal item', 5, 10)
-    item.tick
-    assert_equal(9, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
-  def test_normal_item_on_sell_date
-    item = GildedRose.new('normal item', 0, 10)
-    item.tick
-    assert_equal(8, item.quality)
-    assert_equal(-1, item.days_remaining)
-  end
-
-  def test_normal_item_after_sell_date
-    item = GildedRose.new('normal item', -10, 10)
-    item.tick
-    assert_equal(8, item.quality)
-    assert_equal(-11, item.days_remaining)
-  end
-
-  def test_normal_item_of_zero_quality
-    item = GildedRose.new('normal item', 5, 0)
-    item.tick
-    assert_equal(0, item.quality)
-    assert_equal(4, item.days_remaining)
-  end
-
   def test_brie_before_sell_date
     item = GildedRose.new('Aged Brie', 5, 10)
     item.tick
