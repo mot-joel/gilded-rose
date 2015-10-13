@@ -143,13 +143,27 @@ class TestGildedRose < Minitest::Test # :nodoc:
   end
 
   def test_backstage_very_close_to_sell_date_upper_bound
+    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 5, 10)
+    item.tick
+    assert_equal(13, item.quality)
+    assert_equal(4, item.days_remaining)
+  end
+
+  def test_backstage_very_close_to_sell_date_upper_bound_at_max_quality
+    item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 5, 50)
+    item.tick
+    assert_equal(50, item.quality)
+    assert_equal(4, item.days_remaining)
+  end
+
+  def test_backstage_very_close_to_sell_date_lower_bound
     item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 1, 10)
     item.tick
     assert_equal(13, item.quality)
     assert_equal(0, item.days_remaining)
   end
 
-  def test_backstage_very_close_to_sell_date_upper_bound_at_max_quality
+  def test_backstage_very_close_to_sell_date_lower_bound_at_max_quality
     item = GildedRose.new('Backstage passes to a TAFKAL80ETC concert', 1, 50)
     item.tick
     assert_equal(50, item.quality)
