@@ -1,4 +1,4 @@
-class Normal
+class Item
   attr_reader :days_remaining, :quality
 
   def initialize(days_remaining, quality)
@@ -6,6 +6,11 @@ class Normal
     @quality = quality
   end
 
+  def tick
+  end
+end
+
+class Normal < Item
   def tick
     @days_remaining -= 1
     return if @quality <= 0
@@ -14,26 +19,12 @@ class Normal
   end
 end
 
-class Sulfuras
-  attr_reader :days_remaining, :quality
-
-  def initialize(days_remaining, quality)
-    @days_remaining = days_remaining
-    @quality = quality
-  end
-
+class Sulfuras < Item
   def tick
   end
 end
 
-class Backstage
-  attr_reader :days_remaining, :quality
-
-  def initialize(days_remaining, quality)
-    @days_remaining = days_remaining
-    @quality = quality
-  end
-
+class Backstage < Item
   def tick
     @days_remaining -= 1
     @quality += 1
@@ -44,14 +35,7 @@ class Backstage
   end
 end
 
-class Brie
-  attr_reader :days_remaining, :quality
-
-  def initialize(days_remaining, quality)
-    @days_remaining = days_remaining
-    @quality = quality
-  end
-
+class Brie < Item
   def tick
     @days_remaining -= 1
     @quality += 1
