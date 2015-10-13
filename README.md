@@ -50,7 +50,7 @@ It doesn't matter which testing framework you use[1][]; it just matters that you
 
 ### Bonus Extra Credit!!!
 
-These tests (especially the Minitest ones I wrote) are pretty badly organized. I agree when Sandi Metz says, "If your tests are hard to write, your architecture is wrong." Once you have solved this exercise, rewrite the tests for extra points!
+These tests (especially the Minitest ones I wrote) are pretty badly organized. I agree with Sandi Metz's sentiment that if your tests are hard to write, your architecture is wrong. Once you have solved this exercise, rewrite the tests for extra points!
 
 ### History
 
