@@ -10,7 +10,7 @@ class Item
 
   attr_accessor :config
 
-  def initialize(config={})
+  def initialize(config)
     set_config(config)
   end
 
